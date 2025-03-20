@@ -25,7 +25,7 @@ class Employee with _$Employee {
     required String jobTitle,
     required String workplace,
 
-    /// 사원이 작성한 메모(댓글)의 리스트
+    // 사원이 작성한 메모(댓글)의 리스트
     required List<Comment> memos,
   }) = _Employee;
 
@@ -39,8 +39,7 @@ class Comment with _$Comment {
     required String id,
     required String content,
     required DateTime editDate,
-
-    /// 메모에 달린 답글(댓글). (없을 경우 빈 리스트)
+    // 메모에 달린 답글(댓글). (없을 경우 빈 리스트 반환)
     @Default([]) List<Comment> replies,
   }) = _Comment;
 

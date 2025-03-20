@@ -275,9 +275,8 @@ Employee _$EmployeeFromJson(Map<String, dynamic> json) {
 mixin _$Employee {
   String get id => throw _privateConstructorUsedError;
   String get jobTitle => throw _privateConstructorUsedError;
-  String get workplace => throw _privateConstructorUsedError;
-
-  /// 사원이 작성한 메모(댓글)의 리스트
+  String get workplace =>
+      throw _privateConstructorUsedError; // 사원이 작성한 메모(댓글)의 리스트
   List<Comment> get memos => throw _privateConstructorUsedError;
 
   /// Serializes this Employee to a JSON map.
@@ -433,11 +432,9 @@ class _$EmployeeImpl implements _Employee {
   final String jobTitle;
   @override
   final String workplace;
-
-  /// 사원이 작성한 메모(댓글)의 리스트
+  // 사원이 작성한 메모(댓글)의 리스트
   final List<Comment> _memos;
-
-  /// 사원이 작성한 메모(댓글)의 리스트
+  // 사원이 작성한 메모(댓글)의 리스트
   @override
   List<Comment> get memos {
     if (_memos is EqualUnmodifiableListView) return _memos;
@@ -503,9 +500,7 @@ abstract class _Employee implements Employee {
   @override
   String get jobTitle;
   @override
-  String get workplace;
-
-  /// 사원이 작성한 메모(댓글)의 리스트
+  String get workplace; // 사원이 작성한 메모(댓글)의 리스트
   @override
   List<Comment> get memos;
 
@@ -525,9 +520,8 @@ Comment _$CommentFromJson(Map<String, dynamic> json) {
 mixin _$Comment {
   String get id => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  DateTime get editDate => throw _privateConstructorUsedError;
-
-  /// 메모에 달린 답글(댓글). (없을 경우 빈 리스트)
+  DateTime get editDate =>
+      throw _privateConstructorUsedError; // 메모에 달린 답글(댓글). (없을 경우 빈 리스트 반환)
   List<Comment> get replies => throw _privateConstructorUsedError;
 
   /// Serializes this Comment to a JSON map.
@@ -681,11 +675,9 @@ class _$CommentImpl implements _Comment {
   final String content;
   @override
   final DateTime editDate;
-
-  /// 메모에 달린 답글(댓글). (없을 경우 빈 리스트)
+  // 메모에 달린 답글(댓글). (없을 경우 빈 리스트 반환)
   final List<Comment> _replies;
-
-  /// 메모에 달린 답글(댓글). (없을 경우 빈 리스트)
+  // 메모에 달린 답글(댓글). (없을 경우 빈 리스트 반환)
   @override
   @JsonKey()
   List<Comment> get replies {
@@ -750,9 +742,7 @@ abstract class _Comment implements Comment {
   @override
   String get content;
   @override
-  DateTime get editDate;
-
-  /// 메모에 달린 답글(댓글). (없을 경우 빈 리스트)
+  DateTime get editDate; // 메모에 달린 답글(댓글). (없을 경우 빈 리스트 반환)
   @override
   List<Comment> get replies;
 

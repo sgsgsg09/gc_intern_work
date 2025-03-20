@@ -1,16 +1,33 @@
-# gc_intern_work
+1. **프로젝트 제목 및 배지 (Badges)**
 
-A new Flutter project.
+프로젝트 이름을 크게 표시합니다.
 
-## Getting Started
+최신 빌드 상태, 코드 커버리지, 라이센스 등의 배지를 추가해 프로젝트의 상태를 한눈에 볼 수 있게 합니다.
 
-This project is a starting point for a Flutter application.
+2. **소개 (Introduction)**
 
-A few resources to get you started if this is your first Flutter project:
+프로젝트가 무엇인지 간략하게 설명합니다.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+문제의 배경, 주요 기능 및 목적 등을 포함합니다.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. **목차 (Table of Contents)**
+
+README가 길어질 경우, 사용자들이 원하는 정보를 쉽게 찾을 수 있도록 목차를 제공합니다.
+
+4.**설치 (Installation)**
+
+프로젝트를 클론하거나 설치하는 방법을 자세하게 설명합니다.
+
+의존성, 환경 설정 및 실행 방법 등을 단계별로 나열합니다.
+
+5. **사용법 (Usage)**
+
+프로젝트의 기본 사용법이나 예제 코드를 제공합니다.
+
+주요 기능들을 어떻게 활용할 수 있는지 구체적인 예시를 포함하면 좋습니다.
+
+7. **테스트 (Tests)**
+
+테스트 실행 방법이나 테스트 커버리지 보고서에 대해 설명합니다.
+
+위 양식을 기반으로.
