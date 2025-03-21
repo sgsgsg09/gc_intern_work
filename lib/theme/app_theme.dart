@@ -41,6 +41,13 @@ class AppTheme {
         extendedPadding: const EdgeInsets.all(20),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
+
+      dialogTheme: DialogThemeData(
+        actionsPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+
+        backgroundColor: Colors.white,
+        titleTextStyle: boldGreyText16,
+      ),
     );
   }
 
@@ -59,7 +66,15 @@ class AppTheme {
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );
-
+  static const TextStyle boldGreyText16 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: AppPalette.textgreyColor,
+  );
+  static const TextStyle normalText16 = TextStyle(
+    fontSize: 14,
+    color: AppPalette.textgreyColor,
+  );
   static const TextStyle normalText14 = TextStyle(
     fontSize: 14,
     color: AppPalette.textgreyColor,
@@ -76,11 +91,20 @@ class AppTheme {
   );
 
   static const TextStyle fabTextStyle = TextStyle(
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
-
+  static const TextStyle alertTextStyleComplete = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+  static const TextStyle alertTextStyleCancel = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: AppPalette.greyColor,
+  );
   static const TextStyle greyActionText = TextStyle(
     color: AppPalette.greyColor,
   );

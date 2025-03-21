@@ -11,34 +11,26 @@ class HospitalViewModel extends _$HospitalViewModel {
   late final AbstractHospitalRepository _repository;
   late final String _hospitalId;
 
-  /// build(hospitalId) : 최초 병원 로딩
+  /// build(hospitalId) 치과의원 병원 로딩
   @override
   Future<Hospital> build(String hospitalId) async {
-    _hospitalId = hospitalId; // 병원 식별자 저장
+    _hospitalId = hospitalId; // 병원 식별자.
     _repository = ref.watch(hospitalMockRepositoryProviderProvider);
-    // ↑ 실제 구현체 (ex: 서버통신 / MockRepository) 주입받음
 
-    // 병원 데이터 불러오기
+    // 병원 메모 데이터 불러오기
     final hospital = await _repository.fetchHospital(_hospitalId);
     return hospital;
   }
 
-  // --------------------------------------------------------------------------
-  // 병원 정보 접근 메서드들
-  // --------------------------------------------------------------------------
-
-  /// 현재 상태(AsyncValue<Hospital>)에서 Hospital 객체를 가져옴
+  /// 현재 상태 Hospital 데이터를 가져옴 아닐시 null 반환.
   Hospital? get currentHospital {
     final snap = state.valueOrNull;
     return snap;
   }
 
   /// 병원 ID getter
+  @override
   String get hospitalId => _hospitalId;
-
-  // --------------------------------------------------------------------------
-  // 메모 관련 CRUD
-  // --------------------------------------------------------------------------
 
   /// 새 메모 추가
   Future<void> addComment({
@@ -112,36 +104,39 @@ class HospitalViewModel extends _$HospitalViewModel {
     }
   }
 
-  // --------------------------------------------------------------------------
-  // 사원 목록 / 메모 목록에 접근할 수 있는 편의 메서드 (선택사항)
-  // --------------------------------------------------------------------------
+  List<DetailedComment> get detailedComments {
+    final hosp = currentHospital;
+    if (hosp == null) return [];
+
+    // 모든 직원 반복 -> 각 직원이 가진 memos를 DetailedComment 형태로 변환
+    return hosp.employees.expand((emp) {
+      return emp.memos.map((memo) {
+        return DetailedComment(comment: memo, employee: emp);
+      });
+    }).toList();
+  }
 
   /// 병원에 소속된 모든 직원 리스트 반환
   List<Employee> get employees {
     return currentHospital?.employees ?? [];
   }
 
-  /// 특정 직원의 메모 리스트를 얻어올 수 있는 메서드
-  List<Comment> getMemosOfEmployee(String employeeId) {
-    final emp = employees.firstWhere(
-      (e) => e.id == employeeId,
-      orElse: () => throw Exception('Employee not found: $employeeId'),
-    );
-    return emp.memos;
-  }
-
-  /// 병원 전체(모든 직원)의 메모를 하나로 합쳐서 보고 싶다면
+  // 병원에 속한 모든 메모 및 댓글 정보를 리스트.
   List<Comment> get allComments {
     return employees.expand((e) => e.memos).toList();
   }
-
-  // --------------------------------------------------------------------------
-  // 내부 도우미
-  // --------------------------------------------------------------------------
 
   /// 병원 데이터를 다시 불러와서 state를 갱신
   Future<void> _refreshHospital() async {
     final updated = await _repository.fetchHospital(_hospitalId);
     state = AsyncValue.data(updated);
   }
+}
+
+/// 메모 + 작성자(Employee) 정보를 함께 담는 모델
+class DetailedComment {
+  final Comment comment;
+  final Employee? employee; // 혹은 항상 존재한다면 Employee
+
+  DetailedComment({required this.comment, required this.employee});
 }
