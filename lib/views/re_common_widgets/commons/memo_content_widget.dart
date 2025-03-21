@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gc_intern_work/models/memo_model.dart';
 import 'package:gc_intern_work/theme/app_palette.dart';
 import 'package:gc_intern_work/theme/app_theme.dart';
-import 'package:gc_intern_work/views/common_widgets/alert_modify_reply_widget.dart';
-import 'package:gc_intern_work/views/common_widgets/alert_modify_widget.dart';
-import 'package:gc_intern_work/views/re_common_widgets/viewmodels/hospital_viewmodel.dart';
+import 'package:gc_intern_work/views/dialog_widgets/alert_modify_reply_widget.dart';
+import 'package:gc_intern_work/views/dialog_widgets/alert_modify_widget.dart';
+import 'package:gc_intern_work/viewmodels/hospital_viewmodel.dart';
 import 'package:intl/intl.dart';
 
 class MemoContentWidget extends StatelessWidget {

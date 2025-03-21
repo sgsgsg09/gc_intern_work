@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gc_intern_work/models/memo_model.dart';
 import 'package:gc_intern_work/theme/app_palette.dart';
 import 'package:gc_intern_work/theme/app_theme.dart';
 
-import '../re_common_widgets/viewmodels/hospital_viewmodel.dart';
-import 'package:intl/intl.dart';
+import '../../viewmodels/hospital_viewmodel.dart';
 
-class AlertModifyReplyWidget extends ConsumerStatefulWidget {
-  final String memoId;
+class AlertModifyWidget extends ConsumerStatefulWidget {
+  final Memo? memo; // null이면 새로 작성, 값이 있으면 수정
 
-  final Reply? reply;
-
-  const AlertModifyReplyWidget({super.key, required this.memoId, this.reply});
-
+  const AlertModifyWidget({super.key, this.memo});
   @override
-  _AlertModifyReplyWidgetState createState() => _AlertModifyReplyWidgetState();
+  _AlertModifyWidgetState createState() => _AlertModifyWidgetState();
 }
 
-class _AlertModifyReplyWidgetState
-    extends ConsumerState<AlertModifyReplyWidget> {
+class _AlertModifyWidgetState extends ConsumerState<AlertModifyWidget> {
   late final TextEditingController _memoController;
 
   @override
   void initState() {
     super.initState();
-    _memoController = TextEditingController(text: widget.reply?.content ?? '');
+    _memoController = TextEditingController(text: widget.memo?.content ?? '');
   }
 
   @override
@@ -35,11 +31,6 @@ class _AlertModifyReplyWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final employeeInformation = ["CE", "강서지점"];
-    final memo = ref
-        .watch(hospitalViewModelProvider)
-        .firstWhere((m) => m.id == widget.memoId);
-
     return AlertDialog(
       titlePadding: EdgeInsets.only(top: 15, right: 15, left: 15),
 
@@ -49,7 +40,7 @@ class _AlertModifyReplyWidgetState
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            widget.reply != null ? '답글 수정하기' : '답글 작성하기',
+            widget.memo != null ? '메모 수정하기' : '메모 작성하기',
             style: AppTheme.boldText14,
           ),
           IconButton(
@@ -83,57 +74,32 @@ class _AlertModifyReplyWidgetState
               mainAxisSize: MainAxisSize.min, // 불필요한 공간 차지를 방지
               children: [
                 const SizedBox(height: 10), // 구분선과 본문 사이 간격 추가
-                Column(
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.handshake,
-                          color: AppPalette.textgreyColor,
-                        ),
-                        const SizedBox(width: 6),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  employeeInformation[0],
-                                  style: AppTheme.boldText14,
-                                ),
-                                SizedBox(
-                                  height: 14,
-                                  child: VerticalDivider(
-                                    thickness: 1,
-                                    width: 10,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                Text(
-                                  employeeInformation[1],
-                                  style: AppTheme.boldText14,
-                                ),
-                              ],
-                            ),
-                            Text(
-                              _formatEditDate(memo.editDate),
-                              style: AppTheme.normalText14,
-                            ),
-                          ],
-                        ),
-                      ],
+                    const Icon(
+                      Icons.location_on,
+                      size: 24,
+                      color: AppPalette.primaryColor,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6.0),
-                      child: Text(
-                        memo.content,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                    const SizedBox(width: 2),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "단아치과의원단아치과의원아인이이",
+                            style: AppTheme.boldText16,
+                            overflow: TextOverflow.ellipsis, // 넘치면 '...'으로 표시
+                            maxLines: 1, // 한 줄로 제한 (필요시 2~3줄로 변경 가능)
+                          ),
+                          Text("서울 구로구 구로1동", style: AppTheme.greyText14),
+                        ],
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 10), // 구분선과 본문 사이 간격 추가
-
                 TextField(
                   controller: _memoController,
                   maxLines: null, // 줄 수 제한 없이 자동으로 줄바꿈됨
@@ -183,31 +149,28 @@ class _AlertModifyReplyWidgetState
                     ),
                   ),
                   onPressed: () {
-                    final content = _memoController.text;
-
-                    if (widget.reply != null) {
-                      final updatedReply = Reply(
-                        id: widget.reply!.id,
-                        content: content,
+                    if (widget.memo != null) {
+                      // 기존 메모 수정: 업데이트할 새 메모 객체 생성
+                      final updatedMemo = Memo(
+                        id: widget.memo!.id,
+                        content: _memoController.text,
                         editDate: DateTime.now(),
+                        replies: widget.memo!.replies,
                       );
                       ref
                           .read(hospitalViewModelProvider.notifier)
-                          .updateReply(
-                            widget.memoId,
-                            widget.reply!.id,
-                            updatedReply,
-                          );
+                          .updateMemo(widget.memo!.id, updatedMemo);
                     } else {
-                      // 새 답글 추가
-                      final newReply = Reply(
+                      // 새 메모 추가
+                      final newMemo = Memo(
                         id: DateTime.now().millisecondsSinceEpoch.toString(),
-                        content: content,
+                        content: _memoController.text,
                         editDate: DateTime.now(),
+                        replies: [],
                       );
                       ref
                           .read(hospitalViewModelProvider.notifier)
-                          .addReply(widget.memoId, newReply);
+                          .addMemo(newMemo);
                     }
                     Navigator.pop(context);
                   },
@@ -219,16 +182,5 @@ class _AlertModifyReplyWidgetState
         ),
       ],
     );
-  }
-}
-
-String _formatEditDate(DateTime editDate) {
-  final Duration diff = DateTime.now().difference(editDate);
-  if (diff.inMinutes < 60) {
-    return '${diff.inMinutes}분전 (${DateFormat('yyyy.MM.dd').format(editDate)})';
-  } else if (diff.inHours < 24) {
-    return '${diff.inHours}시간전 (${DateFormat('yyyy.MM.dd').format(editDate)})';
-  } else {
-    return '${diff.inDays}일전 (${DateFormat('yyyy.MM.dd').format(editDate)})';
   }
 }
