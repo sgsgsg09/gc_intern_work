@@ -4,7 +4,7 @@ import 'package:gc_intern_work/theme/app_palette.dart';
 import 'package:gc_intern_work/theme/app_theme.dart';
 import 'package:gc_intern_work/views/re_common_widgets/commons/memo_content_widget.dart';
 import 'package:gc_intern_work/views/re_common_widgets/commons/reply_item_widget.dart';
-import '../viewmodels/hospital_viewmodel.dart'; // HospitalViewModel과 provider가 정의된 파일
+import '../viewmodels/hospital_viewmodel.dart';
 
 class ReMemoItemWidget extends ConsumerWidget {
   const ReMemoItemWidget({Key? key}) : super(key: key);
@@ -47,16 +47,13 @@ class ReMemoItemWidget extends ConsumerWidget {
               Expanded(
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 18, bottom: 12),
-                      child: Row(
-                        children: [
-                          Text(
-                            '총 ${memos.length}개',
-                            style: AppTheme.normalText16,
-                          ),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          '총 ${memos.length}개',
+                          style: AppTheme.normalText16,
+                        ),
+                      ],
                     ),
                     Expanded(
                       child: ListView.builder(
@@ -64,33 +61,37 @@ class ReMemoItemWidget extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         itemBuilder: (context, index) {
                           final memo = memos[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                MemoContentWidget(
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 15.0),
+                                child: MemoContentWidget(
                                   memo: memo,
                                   employeeInformation: employeeInformation,
                                 ),
-                                if (memo.replies.isNotEmpty)
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children:
-                                        memo.replies
-                                            .map(
-                                              (reply) => ReplyItemWidget(
-                                                reply: reply,
-                                                employeeInformation:
-                                                    employeeInformation,
-                                                memoId: memo.id,
-                                              ),
-                                            )
-                                            .toList(),
-                                  ),
-                              ],
-                            ),
+                              ),
+                              if (memo.replies.isNotEmpty)
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children:
+                                      memo.replies
+                                          .map(
+                                            (reply) => ReplyItemWidget(
+                                              reply: reply,
+                                              employeeInformation:
+                                                  employeeInformation,
+                                              memoId: memo.id,
+                                            ),
+                                          )
+                                          .toList(),
+                                ),
+                              const Divider(
+                                height: 1,
+                                thickness: 1,
+                                color: AppPalette.greyColor,
+                              ),
+                            ],
                           );
                         },
                       ),

@@ -16,9 +16,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.theme,
-      home: TodoContentWidget(hospitalId: 'hospital_1'),
-    );
+    return MaterialApp(theme: AppTheme.theme, home: TodoContentWidget());
   }
 }

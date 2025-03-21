@@ -7,10 +7,7 @@ import 'package:gc_intern_work/views/dialog_widgets/alert_modify_widget.dart';
 import 'package:gc_intern_work/views/memo.dart';
 
 class TodoContentWidget extends StatelessWidget {
-  final String hospitalId;
-
-  const TodoContentWidget({Key? key, required this.hospitalId})
-    : super(key: key);
+  const TodoContentWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

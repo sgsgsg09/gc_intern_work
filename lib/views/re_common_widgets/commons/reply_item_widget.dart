@@ -26,11 +26,14 @@ class ReplyItemWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
-            Icons.subdirectory_arrow_right_rounded,
-            color: AppPalette.textgreyColor,
+          Center(
+            child: const Icon(
+              size: 30,
+              Icons.subdirectory_arrow_right_rounded,
+              color: AppPalette.textgreyColor,
+            ),
           ),
           const SizedBox(width: 4),
           Expanded(
