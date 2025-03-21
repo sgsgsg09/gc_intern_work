@@ -5,7 +5,7 @@ import 'package:gc_intern_work/theme/app_palette.dart';
 import 'package:gc_intern_work/theme/app_theme.dart';
 import 'package:gc_intern_work/viewmodels/hospital_viewmodel.dart';
 import 'package:gc_intern_work/views/common_widgets/alert_widget.dart';
-import 'package:gc_intern_work/views/common_widgets/memo_tab_widget.dart';
+import 'package:gc_intern_work/views/re_common_widgets/memo.dart';
 
 class TodoContentWidget extends StatelessWidget {
   final String hospitalId;
@@ -57,7 +57,8 @@ class TodoContentWidget extends StatelessWidget {
                   child: TabBarView(
                     children: [
                       // 메모 탭 (자식 위젯; 스스로 병원 데이터 watch)
-                      MemoTabWidget(hospitalId: hospitalId),
+                      // MemoTabWidget(hospitalId: hospitalId),
+                      ReMemoItemWidget(),
                       // 일정 탭 (예시)
                       const Center(child: Text('일정 탭 내용')),
                     ],
