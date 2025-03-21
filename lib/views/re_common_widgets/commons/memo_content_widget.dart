@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gc_intern_work/theme/app_palette.dart';
 import 'package:gc_intern_work/theme/app_theme.dart';
+import 'package:gc_intern_work/views/common_widgets/alert_modify_reply_widget.dart';
+import 'package:gc_intern_work/views/common_widgets/alert_modify_widget.dart';
 import 'package:gc_intern_work/views/re_common_widgets/viewmodels/hospital_viewmodel.dart';
 import 'package:intl/intl.dart';
 
@@ -62,7 +65,13 @@ class MemoContentWidget extends StatelessWidget {
             Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    // AlertModifyWidget에 기존 memo를 전달.
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertModifyWidget(memo: memo),
+                    );
+                  },
                   child: Text('수정', style: AppTheme.greyActionText),
                 ),
                 const SizedBox(
@@ -73,9 +82,17 @@ class MemoContentWidget extends StatelessWidget {
                     color: AppPalette.greyColor,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Text('삭제', style: AppTheme.greyActionText),
+                Consumer(
+                  builder: (context, ref, _) {
+                    return GestureDetector(
+                      onTap: () {
+                        ref
+                            .read(hospitalViewModelProvider.notifier)
+                            .deleteMemo(memo.id);
+                      },
+                      child: Text('삭제', style: AppTheme.greyActionText),
+                    );
+                  },
                 ),
               ],
             ),
@@ -91,7 +108,12 @@ class MemoContentWidget extends StatelessWidget {
         Row(
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertModifyReplyWidget(memoId: memo.id),
+                );
+              },
               child: Text('답글 쓰기', style: AppTheme.greyActionText),
             ),
           ],

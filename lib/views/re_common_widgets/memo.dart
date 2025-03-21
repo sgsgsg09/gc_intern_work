@@ -75,6 +75,7 @@ class ReMemoItemWidget extends ConsumerWidget {
                                             reply: reply,
                                             employeeInformation:
                                                 employeeInformation,
+                                            memoId: memo.id,
                                           ),
                                         )
                                         .toList(),

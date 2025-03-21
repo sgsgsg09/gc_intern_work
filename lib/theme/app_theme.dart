@@ -58,7 +58,7 @@ class AppTheme {
     color: Colors.black,
   );
   static const TextStyle boldText16 = TextStyle(
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: FontWeight.w600,
     color: Colors.black,
   );

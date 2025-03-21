@@ -6,7 +6,7 @@ part of 'hospital_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$hospitalViewModelHash() => r'fb3fc9b63d59b25f5917ceb69790b85bde4142a6';
+String _$hospitalViewModelHash() => r'48b9c3b72e2f02333a761344ae4b9db732ca4dc2';
 
 /// See also [HospitalViewModel].
 @ProviderFor(HospitalViewModel)

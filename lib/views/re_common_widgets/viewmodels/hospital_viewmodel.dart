@@ -105,5 +105,73 @@ class HospitalViewModel extends _$HospitalViewModel {
     ];
   }
 
-  // 필요한 경우 메모 추가, 수정, 삭제 등의 메서드들을 추가할 수 있습니다.
+  // 메서드 로직.
+  // 메모 추가
+  void addMemo(Memo memo) {
+    state = [...state, memo];
+  }
+
+  // 메모 수정 (id에 해당하는 메모를 새 Memo 객체로 교체)
+  void updateMemo(String id, Memo updatedMemo) {
+    state = state.map((memo) => memo.id == id ? updatedMemo : memo).toList();
+  }
+
+  // 메모 삭제
+  void deleteMemo(String id) {
+    state = state.where((memo) => memo.id != id).toList();
+  }
+
+  // 특정 메모에 답글 추가
+  void addReply(String memoId, Reply reply) {
+    state =
+        state.map((memo) {
+          if (memo.id == memoId) {
+            return Memo(
+              id: memo.id,
+              content: memo.content,
+              editDate: memo.editDate,
+              replies: [...memo.replies, reply],
+            );
+          }
+          return memo;
+        }).toList();
+  }
+
+  // 특정 메모의 답글 수정 (memoId와 replyId에 해당하는 답글을 업데이트)
+  void updateReply(String memoId, String replyId, Reply updatedReply) {
+    state =
+        state.map((memo) {
+          if (memo.id == memoId) {
+            final updatedReplies =
+                memo.replies
+                    .map((r) => r.id == replyId ? updatedReply : r)
+                    .toList();
+            return Memo(
+              id: memo.id,
+              content: memo.content,
+              editDate: memo.editDate,
+              replies: updatedReplies,
+            );
+          }
+          return memo;
+        }).toList();
+  }
+
+  // 특정 메모의 답글 삭제
+  void deleteReply(String memoId, String replyId) {
+    state =
+        state.map((memo) {
+          if (memo.id == memoId) {
+            final updatedReplies =
+                memo.replies.where((r) => r.id != replyId).toList();
+            return Memo(
+              id: memo.id,
+              content: memo.content,
+              editDate: memo.editDate,
+              replies: updatedReplies,
+            );
+          }
+          return memo;
+        }).toList();
+  }
 }

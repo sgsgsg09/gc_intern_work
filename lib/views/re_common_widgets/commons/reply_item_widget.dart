@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gc_intern_work/theme/app_palette.dart';
 import 'package:gc_intern_work/theme/app_theme.dart';
+import 'package:gc_intern_work/views/common_widgets/alert_modify_reply_widget.dart';
 import 'package:gc_intern_work/views/re_common_widgets/viewmodels/hospital_viewmodel.dart';
 import 'package:intl/intl.dart';
 
 class ReplyItemWidget extends StatelessWidget {
+  final String memoId;
+
   final Reply reply;
   final List<String> employeeInformation;
 
   const ReplyItemWidget({
     Key? key,
+    required this.memoId,
+
     required this.reply,
     required this.employeeInformation,
   }) : super(key: key);
@@ -74,9 +80,24 @@ class ReplyItemWidget extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text('수정', style: AppTheme.greyActionText),
+                        Consumer(
+                          builder: (context, ref, child) {
+                            return GestureDetector(
+                              onTap: () {
+                                // 수정 버튼: AlertModifyReplyWidget을 열어 기존 답글을 편집
+                                showDialog(
+                                  context: context,
+                                  builder:
+                                      (context) => AlertModifyReplyWidget(
+                                        memoId:
+                                            memoId, // ReplyItemWidget에 추가된 memoId 필드
+                                        reply: reply,
+                                      ),
+                                );
+                              },
+                              child: Text('수정', style: AppTheme.greyActionText),
+                            );
+                          },
                         ),
                         const SizedBox(
                           height: 14,
@@ -86,9 +107,18 @@ class ReplyItemWidget extends StatelessWidget {
                             color: AppPalette.greyColor,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text('삭제', style: AppTheme.greyActionText),
+                        Consumer(
+                          builder: (context, ref, child) {
+                            return GestureDetector(
+                              onTap: () {
+                                // 삭제 버튼: viewmodel의 deleteReply 메서드를 호출하여 답글 삭제
+                                ref
+                                    .read(hospitalViewModelProvider.notifier)
+                                    .deleteReply(memoId, reply.id);
+                              },
+                              child: Text('삭제', style: AppTheme.greyActionText),
+                            );
+                          },
                         ),
                       ],
                     ),

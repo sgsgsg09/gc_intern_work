@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gc_intern_work/theme/app_palette.dart';
 import 'package:gc_intern_work/theme/app_theme.dart';
-import 'package:gc_intern_work/viewmodels/hospital_viewmodel.dart';
-import 'package:gc_intern_work/views/common_widgets/alert_widget.dart';
+import 'package:gc_intern_work/views/common_widgets/alert_modify_widget.dart';
 import 'package:gc_intern_work/views/re_common_widgets/memo.dart';
 
 class TodoContentWidget extends StatelessWidget {
@@ -72,7 +71,7 @@ class TodoContentWidget extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (dialogContext) {
-                    return AlertWidget();
+                    return AlertModifyWidget();
                   },
                 );
               },
