@@ -43,9 +43,14 @@ dependencies:
   riverpod: ^2.6.1
   hive: ^2.2.3
   path_provider: ^2.1.5
-  isar_flutter_libs: ^3.1.0+1
+
   hive_flutter: ^1.1.0
   mockito: ^5.4.5
+  isar_flutter_libs:
+    hosted:
+      name: isar_flutter_libs
+      url: https://pub.isar-community.dev/
+    version: ^3.0.0
 
 dev_dependencies:
   flutter_test:

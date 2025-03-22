@@ -90,6 +90,6 @@ copyWith, fromJson, toJson 등의 기능을 자동 생성
 
 **메모 수정 :** updateMemo(Memo memo), 메모 ID를 키로 하여 기존 메모를 덮어씀
 
-**메모 삭제 :**deleteMemo(String id), 해당 ID의 메모를 박스에서 삭제
+**메모 삭제 :** deleteMemo(String id), 해당 ID의 메모를 박스에서 삭제
 
 ---

@@ -44,6 +44,7 @@ class ReMemoItemWidget extends ConsumerWidget {
                   style: AppTheme.textgreyColor15,
                 ),
               ),
+              SizedBox(height: 18),
               Expanded(
                 child: Column(
                   children: [
@@ -86,6 +87,7 @@ class ReMemoItemWidget extends ConsumerWidget {
                                           )
                                           .toList(),
                                 ),
+                              const SizedBox(height: 15),
                               const Divider(
                                 height: 1,
                                 thickness: 1,
