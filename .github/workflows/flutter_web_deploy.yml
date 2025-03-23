@@ -1,4 +1,4 @@
-name: gc_intern_work
+name: GC_INTERN_WORK
 
 on:
   push:
