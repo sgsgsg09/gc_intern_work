@@ -3,6 +3,9 @@ Flutter 3.29.1
 **Tools**
 • Dart 3.7.0
 • DevTools 2.42.2
+### GitHub_actions를 통한 배포.
+
+https://sgsgsg09.github.io/gc_intern_work/
 
 ### 과제 내용.
 
