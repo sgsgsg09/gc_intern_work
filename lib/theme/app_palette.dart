@@ -8,8 +8,6 @@ class AppPalette {
   static const Color greyColor = Colors.grey;
   static const Color blackColor = Colors.black;
   static const Color black87Color = Colors.black87;
-
-  // `Colors.grey.shade500` 대신 비슷한 값으로 직접 지정 (shades는 const 사용 불가)
   static final Color greyShade500 = Colors.grey.shade500;
 
   // 필요하면 다른 색상 상수도 추가...

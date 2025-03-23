@@ -13,9 +13,7 @@ class AppTheme {
         centerTitle: true,
       ),
 
-      // 텍스트 테마는 필요에 따라 세분화하여 지정
       textTheme: TextTheme(
-        // 예시로 몇 가지만 지정
         bodyMedium: TextStyle(fontSize: 14, color: AppPalette.blackColor),
         bodyLarge: TextStyle(fontSize: 16, color: AppPalette.black87Color),
       ),
@@ -51,7 +49,7 @@ class AppTheme {
     );
   }
 
-  /// 자주 쓰는 텍스트 스타일 예시
+  /// 텍스트 스타일
   static const TextStyle boldText20 = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,

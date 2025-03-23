@@ -12,7 +12,8 @@ class ReMemoItemWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final memoList = ref.watch(hospitalViewModelProvider);
-    /*     if (memoList.isEmpty) {
+    /* 테스트용.
+         if (memoList.isEmpty) {
       return const Center(child: Text("메모가 없습니다."));
     } */
 

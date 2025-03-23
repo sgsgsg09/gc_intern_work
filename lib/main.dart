@@ -5,10 +5,9 @@ import 'package:gc_intern_work/views/todo_content_widget.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> main() async {
+  // Hive 열기 및 초기화
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-
-  // 필요한 Hive box 열기 (예: memo_box)
   await Hive.openBox<String>('memo_box');
   runApp(ProviderScope(child: MyApp()));
 }

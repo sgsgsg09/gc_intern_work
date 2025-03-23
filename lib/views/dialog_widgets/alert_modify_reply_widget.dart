@@ -161,7 +161,7 @@ class _AlertModifyReplyWidgetState
               ),
             ],
           ),
-          // 하단 취소 / 확인 버튼
+          // 하단 버튼
           actionsAlignment: MainAxisAlignment.center,
           actions: [
             SizedBox(
