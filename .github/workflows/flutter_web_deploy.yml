@@ -1,4 +1,4 @@
-name: Deploy GC Intern Project
+name: Deploy_GC_Intern_Project
 
 on:
   push:
